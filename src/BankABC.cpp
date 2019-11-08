@@ -251,20 +251,17 @@ BankAccount ** readAccounts()
     while (inputFile && (counter < K_SizeMax - 1)){
         // YOU HAVE TO DO SOMETHING FROM HERE !!!
 	
-
+          if (TypeRead == 3) {
+               *pAccount = new DepositAccount(accountRead, TypeRead, nameRead, dateRead, balanceRead, nbyearRead);
+          }
+          else if (TypeRead == 4) {
+               balanceRead += (balanceRead * nbyearRead * RateRead) / 36000;
+               *pAccount = new LoanAccount(accountRead, TypeRead, nameRead, dateRead, balanceRead, nbyearRead, RateRead);
+          }
+          else {
+               *pAccount = new BankAccount(accountRead, TypeRead, nameRead, dateRead, balanceRead);
+          }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
         // UNTIL THIS POINT.
 
           inputFile >> accountRead >> TypeRead >> dateRead >> balanceRead >> nbyearRead >> RateRead;
