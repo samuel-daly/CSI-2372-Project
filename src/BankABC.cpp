@@ -202,11 +202,12 @@ inline void Transaction::setAmount(double amountTr)
 // Inputs: listAccount(BankAccount *), a list of bank accounts.
 // Outputs: listAccount(BankAccount *), sorted list of bank accounts.
 //****************************************************************************
-void sortAccounts(BankAccount ** list){
+void sortAccounts(BankAccount ** list)
+{
 
   BankAccount * pointer = nullptr;
     for (int i = 0; i < K_SizeMax; i++){
-        for (int j = 0; K_SizeMax - 1; i++){
+        for (int j = 0; K_SizeMax - 1; j++){
             //IF THE ACCOUNTID = 0, BREAK THE LOOP
             if (list[j+1]->getAccountId() == 0){
                 break;
