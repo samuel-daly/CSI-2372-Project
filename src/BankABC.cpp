@@ -208,7 +208,7 @@ void sortAccounts(BankAccount ** list)
 
   BankAccount * pointer = nullptr;
     for (int i = 0; i < K_SizeMax; i++){
-        for (int j = 0; K_SizeMax - 1; j++){
+        for (int j = 0; j < K_SizeMax - 1; j++){
             //IF THE ACCOUNTID = 0, BREAK THE LOOP
             if (list[j+1]->getAccountId() == 0){
                 break;
@@ -422,7 +422,7 @@ void updateAccounts(BankAccount ** listAccounts) {
 	double amount;
 
 	while (inputFile) {
-          
+
           inputFile >> id >> type >> date >> code >> amount;
 
 		for (int i = 0; i < K_SizeMax; i++) {
@@ -453,13 +453,13 @@ void displayAccounts(BankAccount ** listAccounts)
 
     cout << "                       THE REPORT OF THE BANK ACCOUNTS OF CLIENTS" << endl;
     cout << "                       ------------------------------------------" << endl << endl;
-     
+
     for ( int i = 0; i < K_SizeMax; i++){
          //Break if last account
           if (listAccounts[i]->getAccountId() == 0){
                 break;
             }
-         
+
          string clName = (*listAccounts[i]).getClientName();
          bool printBalance = FALSE;
 
@@ -470,8 +470,8 @@ void displayAccounts(BankAccount ** listAccounts)
                cout << "------------\t\t----\t-----------\t-------\t\t--------\t----" << endl;
                printBalance = TRUE;
          }
-        
-         
+
+
           double tb = 0;
           // loop over list members and compare to current memeber
           for (int j =i ; j< K_SizeMax; j++){
@@ -479,7 +479,7 @@ void displayAccounts(BankAccount ** listAccounts)
                if (listAccounts[j]->getAccountId() == 0){
                 break;
                }
-           
+
               if(!find[j]){
                    string clName2 = (*listAccounts[j]).getClientName();
                    if(clName2 == clName){
@@ -492,10 +492,10 @@ void displayAccounts(BankAccount ** listAccounts)
                              LoanAccount *p = dynamic_cast <LoanAccount*> (listAccounts[j]);
                         } else if (type == 3) {
                              DepositAccount *p = dynamic_cast <DepositAccount*> (listAccounts[j]);
-                        } 
-                        
-                        
-                       
+                        }
+
+
+
                         (*p).print();
                         cout << endl;
                         find[j] = TRUE; // skip this account in the next loop
@@ -505,14 +505,14 @@ void displayAccounts(BankAccount ** listAccounts)
                         tb += bl;
                    }
               }
-              
+
          }
          //printing the total balance
          if(printBalance){
                cout <<"Total Balance: "<< tb << endl;
                cout << endl << endl;
          }
-    }   
+    }
 }
 
 
