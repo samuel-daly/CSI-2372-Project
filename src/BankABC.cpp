@@ -452,18 +452,63 @@ void displayAccounts(BankAccount ** listAccounts)
 
     cout << "                       THE REPORT OF THE BANK ACCOUNTS OF CLIENTS" << endl;
     cout << "                       ------------------------------------------" << endl << endl;
+     
+    for ( int i = 0; i < K_SizeMax; i++){
+         //Break if last account
+          if (listAccounts[i]->getAccountId() == 0){
+                break;
+            }
+         
+         string clName = (*listAccounts[i]).getClientName();
+         bool printBalance = FALSE;
 
-    int i = 0;
+         //print headers per client name
+         if (!find[i]){
+               cout << "        Client Name: "<< clName  << endl;
+               cout << "Bank Account\t\tType\tUpdate Date\tBalance\t\tNb.Years\tRate" << endl;
+               cout << "------------\t\t----\t-----------\t-------\t\t--------\t----" << endl;
+               printBalance = TRUE;
+         }
+        
+         
+          double tb = 0;
+          // loop over list members and compare to current memeber
+          for (int j =i ; j< K_SizeMax; j++){
 
+               if (listAccounts[j]->getAccountId() == 0){
+                break;
+               }
+           
+              if(!find[j]){
+                   string clName2 = (*listAccounts[j]).getClientName();
+                   if(clName2 == clName){
 
+                        int type = (*listAccounts[j]).getType();
 
-
-
-
-
-
-
-
+                         // define bank account pointer according to type
+                        BankAccount *p = listAccounts[j];
+                        if(type == 4){
+                             LoanAccount *p = dynamic_cast <LoanAccount*> (listAccounts[j]);
+                        } else if (type == 3) {
+                             DepositAccount *p = dynamic_cast <DepositAccount*> (listAccounts[j]);
+                        } 
+                        
+                        double bl = (*listAccounts[j]).getBalance();
+                        tb += bl;
+                       
+                        (*p).print();
+                        cout << endl;
+                        find[j] = TRUE; // skip this account in the next loop
+                   }
+              }
+              
+         }
+         //printing the total balance
+         if(printBalance){
+               cout <<"Total Balance: "<< tb << endl;
+               cout << endl << endl;
+         }
+    }   
 }
 
 
