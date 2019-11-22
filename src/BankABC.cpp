@@ -427,6 +427,9 @@ void updateAccounts(BankAccount ** listAccounts) {
           Transaction trans(id, type, date, code, amount);
 
           while (accptr) {
+               if(accptr->getAccountId() == 0){
+                    break;
+               }
                if (accptr->getAccountId() == id && accptr->getType() == type) {
                     accptr->executeTransaction(trans);
                     accptr = *listAccounts;
@@ -522,7 +525,7 @@ int main()
     updateAccounts(list);
     cout << endl << endl;
     cout << "               ************************************************" << endl;
-    cout << "               * REAFFICHAGE DES DONNEES APRES LA MISE A JOUR *" << endl;
+    cout << "               *            REDISPLAYING AFTER UPDATE         *" << endl;
     cout << "               ************************************************" << endl;
     displayAccounts(list);
     cout << endl;
