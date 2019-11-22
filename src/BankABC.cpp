@@ -509,7 +509,7 @@ void displayAccounts(BankAccount ** listAccounts)
          }
          //printing the total balance
          if(printBalance){
-               cout <<"Total Balance: "<< tb << endl;
+               cout <<"          TOTAL ACCOUNTS: "<< tb << endl;
                cout << endl << endl;
          }
     }
