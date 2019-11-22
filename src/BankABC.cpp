@@ -496,12 +496,15 @@ void displayAccounts(BankAccount ** listAccounts)
                              DepositAccount *p = dynamic_cast <DepositAccount*> (listAccounts[j]);
                         } 
                         
-                        double bl = (*listAccounts[j]).getBalance();
-                        tb += bl;
+                        
                        
                         (*p).print();
                         cout << endl;
                         find[j] = TRUE; // skip this account in the next loop
+
+                         // calculating the total balance
+                        double bl = (*p).getBalance();
+                        tb += bl;
                    }
               }
               
