@@ -20,6 +20,7 @@
 #include <cstring>
 #include <stdlib.h>
 #include <iomanip>
+#include <string>
 
 #include "BankABC.h"
 
@@ -420,22 +421,20 @@ void updateAccounts(BankAccount ** listAccounts) {
 	int date, code;
 	double amount;
 
-	inputFile >> id >> type >> date >> code >> amount;
+	while (inputFile) {
+          
+          inputFile >> id >> type >> date >> code >> amount;
 
-	while(inputFile){
-		for(int i = 0; i < K_SizeMax; i++){
-			if (listAccounts[i]->getAccountId() == 0){
+		for (int i = 0; i < K_SizeMax; i++) {
+			if (listAccounts[i]->getAccountId() == 0) {
 				break;
 			}
-			if (listAccounts[i]->getAccountId() == id && listAccounts[i]->getType() == type){
+			if (listAccounts[i]->getAccountId() == id && listAccounts[i]->getType() == type) {
 				Transaction trans(id, type, date, code, amount);
-				if (listAccounts[i]->validateTransaction(trans)){
-					listAccounts[i]->executeTransaction(trans);
-				}
+				listAccounts[i]->executeTransaction(trans);
 				break;
 			}
 		}
-	inputFile >> id >> type >> date >> code >> amount;
 	}
 }
 
@@ -466,7 +465,7 @@ void displayAccounts(BankAccount ** listAccounts)
 
          //print headers per client name
          if (!find[i]){
-               cout << "        Client Name: "<< clName  << endl;
+               cout << "        Client Name: " << clName  << endl;
                cout << "Bank Account\t\tType\tUpdate Date\tBalance\t\tNb.Years\tRate" << endl;
                cout << "------------\t\t----\t-----------\t-------\t\t--------\t----" << endl;
                printBalance = TRUE;
