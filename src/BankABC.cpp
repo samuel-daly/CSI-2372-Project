@@ -416,28 +416,27 @@ void updateAccounts(BankAccount ** listAccounts) {
           return;
      }
 
-     BankAccount *accptr = *listAccounts;
+	long id, type;
+	int date, code;
+	double amount;
 
-     int id, type, date, code;
-     double amount;
+	inputFile >> id >> type >> date >> code >> amount;
 
-     while (inputFile) {
-
-          inputFile >> id >> type >> date >> code >> amount;
-          Transaction trans(id, type, date, code, amount);
-
-          while (accptr) {
-               if(accptr->getAccountId() == 0){
-                    break;
-               }
-               if (accptr->getAccountId() == id && accptr->getType() == type) {
-                    accptr->executeTransaction(trans);
-                    accptr = *listAccounts;
-                    break;
-               }
-               accptr++;
-          }
-     }
+	while(inputFile){
+		for(int i = 0; i < K_SizeMax; i++){
+			if (listAccounts[i]->getAccountId() == 0){
+				break;
+			}
+			if (listAccounts[i]->getAccountId() == id && listAccounts[i]->getType() == type){
+				Transaction trans(id, type, date, code, amount);
+				if (listAccounts[i]->validateTransaction(trans)){
+					listAccounts[i]->executeTransaction(trans);
+				}
+				break;
+			}
+		}
+	inputFile >> id >> type >> date >> code >> amount;
+	}
 }
 
 //******************************************************************************
