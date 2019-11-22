@@ -261,7 +261,7 @@ void sortAccounts(BankAccount ** list)
 //******************************************************************
 BankAccount ** readAccounts()
 {
-    ifstream inputFile("clients.txt");	// Opening the input file
+    ifstream inputFile("CLIENTS.TXT");	// Opening the input file
     if (!inputFile)            		// If the file is not found...
     {
         cout << "File not found !!!" << endl;
@@ -409,7 +409,7 @@ void LoanAccount::executeTransaction(const Transaction trans)
 // Output: Nothing.
 //*************************************************************************
 void updateAccounts(BankAccount ** listAccounts) {
-     ifstream inputFile("transact.txt");	// Opening the input file
+     ifstream inputFile("TRANSACT.TXT");	// Opening the input file
 
      if (!inputFile) {
           cout << "Transaction file not found!";
