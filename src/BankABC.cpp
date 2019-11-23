@@ -412,6 +412,7 @@ void LoanAccount::executeTransaction(const Transaction trans)
 void updateAccounts(BankAccount ** listAccounts) {
      ifstream inputFile("TRANSACT.TXT");	// Opening the input file
 
+     // Check if the file opened correctly
      if (!inputFile) {
           cout << "Transaction file not found!";
           return;
@@ -421,15 +422,21 @@ void updateAccounts(BankAccount ** listAccounts) {
 	int date, code;
 	double amount;
 
+     // go through the file
 	while (inputFile) {
 
+          // read a line in the file
           inputFile >> id >> type >> date >> code >> amount;
 
+          // for each account
 		for (int i = 0; i < K_SizeMax; i++) {
+               // if reached the end
 			if (listAccounts[i]->getAccountId() == 0) {
 				break;
 			}
+               // if account matches the one read from the file
 			if (listAccounts[i]->getAccountId() == id && listAccounts[i]->getType() == type) {
+                    // do the transaction
 				Transaction trans(id, type, date, code, amount);
 				listAccounts[i]->executeTransaction(trans);
 				break;
